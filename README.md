@@ -63,7 +63,7 @@ Testing requires Molecule and Docker
 
 ```
 pipenv install -r molecule/requirements.txt
-molecule test
+pipenv run molecule test
 ```
 
 ## License

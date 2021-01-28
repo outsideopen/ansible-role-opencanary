@@ -89,7 +89,7 @@ opencanary_config_default:
   telnet.enabled: false
   telnet.honeycreds:
     - username: admin
-      password: $pbkdf2-sha512$19000$bG1NaY3xvjdGyBlj7N37Xw$dGrmBqqWa1okTCpN3QEmeo9j5DuV2u1EuVFD8Di0GxNiM64To5O/Y66f7UASvnQr8.LCzqTm6awC8Kj/aGKvwA,
+      password: $pbkdf2-sha512$19000$bG1NaY3xvjdGyBlj7N37Xw$dGrmBqqWa1okTCpN3QEmeo9j5DuV2u1EuVFD8Di0GxNiM64To5O/Y66f7UASvnQr8.LCzqTm6awC8Kj/aGKvwA  # yamllint disable-line rule:line-length
     - username: admin
       password: admin1
   telnet.port: 23
@@ -97,4 +97,3 @@ opencanary_config_default:
   tftp.port: 69
   vnc.enabled: false
   vnc.port: 5000
-

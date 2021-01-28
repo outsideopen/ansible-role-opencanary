@@ -3,14 +3,17 @@
   copy:
     content: "{{ __opencanary_config }}"
     dest: "{{ opencanary_path }}/opencanary.conf"
+    mode: 0644
   notify: restart opencanary
 
 - name: Configure opencanary log rotation
   template:
     src: logrotate.conf.j2
     dest: "{{ opencanary_logrotate_path }}/opencanary"
+    mode: 0644
 
 - name: Configure systemd
   template:
     src: opencanary.service.j2
     dest: "{{ opencanary_systemd_path }}/opencanary.service"
+    mode: 0644

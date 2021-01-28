@@ -2,13 +2,13 @@
 - name: Setup group
   group:
     name: "{{ opencanary_group }}"
-    system: yes
+    system: true
 
 - name: Setup user
   user:
     name: "{{ opencanary_user }}"
     comment: opencanary service user
-    system: yes
+    system: true
     group: "{{ opencanary_group }}"
     home: "{{ opencanary_path }}"
 
@@ -30,5 +30,6 @@
     state: directory
     owner: "{{ opencanary_user }}"
     group: "{{ opencanary_group }}"
+    mode: 0755
   loop:
     - "{{ opencanary_log_path | default('/var/log/opencanary') }}"

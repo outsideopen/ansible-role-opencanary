@@ -2,4 +2,4 @@
 - name: Install dependencies
   apt:
     name: "{{ opencanary_packages }}"
-    update_cache: yes
+    update_cache: true

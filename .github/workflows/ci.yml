@@ -74,7 +74,8 @@ jobs:
       - uses: 8398a7/action-slack@v3
         with:
           author_name: Molecule tests
-          status: ${{ env.WORKFLOW_CONCLUSION }} # neutral, success, skipped, cancelled, timed_out, action_required, failure
+          # neutral, success, skipped, cancelled, timed_out, action_required, failure
+          status: ${{ env.WORKFLOW_CONCLUSION }}
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           SLACK_WEBHOOK_URL: ${{ secrets.SLACK_WEBHOOK_URL }}

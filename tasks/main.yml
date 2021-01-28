@@ -1,0 +1,14 @@
+---
+- include_tasks: variables.yml
+- include_tasks: "setup-{{ ansible_os_family }}.yml"
+- include_tasks: setup.yml
+- include_tasks: configure.yml
+
+# finalize
+- name: Mark opencanary service to start, and enable on boot
+  systemd:
+    name: opencanary
+    state: started
+    enabled: yes
+    daemon_reload: yes
+

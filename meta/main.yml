@@ -1,0 +1,17 @@
+---
+dependencies: []
+galaxy_info:
+  role_name: opencanary
+  author: David Lundgren
+  company: Outside Open
+  description: Installs thinkst opencanary
+  license: MIT
+  min_ansible_version: 2.9
+  platforms:
+    - name: Ubuntu
+      versions:
+        - bionic
+        - focal
+  galaxy_tags:
+    - system
+    - honeypot

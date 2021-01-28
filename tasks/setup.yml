@@ -1,0 +1,34 @@
+---
+- name: Setup group
+  group:
+    name: "{{ opencanary_group }}"
+    system: yes
+
+- name: Setup user
+  user:
+    name: "{{ opencanary_user }}"
+    comment: opencanary service user
+    system: yes
+    group: "{{ opencanary_group }}"
+    home: "{{ opencanary_path }}"
+
+- name: Allow sudo access
+  template:
+    src: sudo.j2
+    dest: /etc/sudoers.d/opencanary
+    mode: 0600
+
+- name: Install python dependencies
+  pip:
+    name: "{{ item.key }}"
+    version: "~={{ item.value }}"
+  with_dict: "{{ opencanary_python_packages }}"
+
+- name: Setup log path
+  file:
+    path: "{{ item }}"
+    state: directory
+    owner: "{{ opencanary_user }}"
+    group: "{{ opencanary_group }}"
+  loop:
+    - "{{ opencanary_log_path | default('/var/log/opencanary') }}"

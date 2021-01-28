@@ -1,0 +1,40 @@
+---
+class: PyLogger
+kwargs:
+  formatters:
+    plain:
+      format: {{ opencanary_log_format | default('\\%(message)s') }}
+  handlers:
+{% if 'file' in opencanary_loggers %}
+    file:
+      class: logging.FileHandler
+      filename: {{ opencanary_loggers.file }}
+{% endif %}
+{% if 'console' in opencanary_loggers %}
+    console:
+      class: logging.StreamHandler
+      stream: {{ opencanary_loggers.console }}
+{% endif %}
+{% if 'slack' in opencanary_loggers %}
+    slack:
+      class: opencanary.logger.SlackHandler
+      webhook_url: {{ opencanary_loggers.slack }}
+{% endif %}
+{% if 'smtp' in opencanary_loggers %}
+    SMTP:
+      class: logging.handlers.SMTPHandler
+      mailhost:
+        - {{ opencanary_loggers.smtp.host }}
+        - {{ opencanary_loggers.smtp.port | default(25) }}
+      {% if 'credentials' in opencanary_loggers.smtp -%}
+      credentials:
+        - {{ opencanary_loggers.smtp.credentials.username }}
+        - {{ opencanary_loggers.smtp.credentials.password }}
+      {% endif -%}
+      fromaddr: {{ opencanary_loggers.smtp.from }}
+      toaddrs: {{ opencanary_loggers.smtp.to | default([]) }}
+      subject: {{ opencanary_loggers.smtp.subject | default("OpenCanary Alert") }}
+      {% if 'credentials' in opencanary_loggers.smtp -%}
+      secure: []
+      {% endif -%}
+{% endif %}

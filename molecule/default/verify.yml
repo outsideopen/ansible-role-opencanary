@@ -1,0 +1,14 @@
+---
+- name: Verify
+  hosts: all
+  gather_facts: false
+  tasks:
+    - name: Populate service facts
+      ansible.builtin.service_facts:
+
+    - name: Ensure opencanary is setup and running
+      assert:
+        that:
+          - "'opencanary.service' in ansible_facts.services"
+          - '"running" == ansible_facts.services["opencanary.service"].state'
+          - '"enabled" == ansible_facts.services["opencanary.service"].status'

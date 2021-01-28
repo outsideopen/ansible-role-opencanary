@@ -1,0 +1,5 @@
+---
+- name: restart opencanary
+  service:
+    name: opencanary
+    state: restarted

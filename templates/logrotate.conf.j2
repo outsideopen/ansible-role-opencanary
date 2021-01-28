@@ -1,0 +1,10 @@
+{{ opencanary_log_path }}/*.log {
+    daily
+    rotate 30
+    compress
+    missingok
+    sharedscripts
+    postrotate
+        /usr/bin/systemctl restart opencanary
+    endscript
+}

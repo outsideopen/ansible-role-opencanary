@@ -1,5 +1,6 @@
 ---
 - name: restart opencanary
+  when: "opencanary_service_state != 'stopped'"
   service:
     name: opencanary
     state: restarted

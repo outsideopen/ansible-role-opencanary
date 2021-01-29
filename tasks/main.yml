@@ -5,7 +5,7 @@
 - include_tasks: configure.yml
 
 # finalize
-- name: Mark opencanary service to start, and enable on boot
+- name: Mark opencanary enabled on boot, and state if set
   systemd:
     name: opencanary
     state: "{{ opencanary_service_state }}"

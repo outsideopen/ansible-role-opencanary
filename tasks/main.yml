@@ -8,6 +8,6 @@
 - name: Mark opencanary service to start, and enable on boot
   systemd:
     name: opencanary
-    state: started
+    state: "{{ opencanary_service_state }}"
     enabled: true
     daemon_reload: true

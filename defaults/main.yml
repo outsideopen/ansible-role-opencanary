@@ -12,6 +12,8 @@ opencanary_loggers:
   file: "{{ opencanary_log_path }}/opencanary.log"
   console: ext://sys.stdout
 
+opencanary_service_state: started
+
 opencanary_python_packages: "{{ opencanary_python_package_defaults | combine(opencanary_python_package_extra) }}"
 opencanary_python_package_extra: {}
 opencanary_python_package_defaults:

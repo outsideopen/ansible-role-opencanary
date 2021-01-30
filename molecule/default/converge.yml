@@ -11,4 +11,4 @@
   tasks:
     - name: Include opencanary
       include_role:
-        name: opencanary
+        name: outsideopen.opencanary

@@ -1,13 +1,9 @@
 ---
-opencanary_user: opencanary
-opencanary_group: opencanary
-opencanary_path: /opt/opencanary
-opencanary_pid: /opt/opencanary/opencanary.pid
-
 opencanary_log_path: /var/log/opencanary
 opencanary_logrotate_path: /etc/logrotate.d
 opencanary_systemd_path: /etc/systemd/system
 
+opencanary_log_format: "%(message)s"
 opencanary_loggers:
   file: "{{ opencanary_log_path }}/opencanary.log"
   console: ext://sys.stdout

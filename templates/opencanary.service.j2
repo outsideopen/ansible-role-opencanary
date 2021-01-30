@@ -4,12 +4,11 @@ Description=OpenCanary honeypot daemons
 After=network.target
 
 [Service]
-ExecStart=/usr/local/bin/opencanaryd --dev
+User=root
+Restart=always
+ExecStart=/usr/local/bin/opencanaryd --start
 ExecStop=/usr/local/bin/opencanaryd --stop
-User={{ opencanary_user }}
-Group={{ opencanary_group }}
-PIDFile={{ opencanary_pid }}
-WorkingDirectory={{ opencanary_path }}
+PIDFile=/usr/local/bin/opencanaryd.pid
 
 [Install]
 WantedBy=multi.user.target

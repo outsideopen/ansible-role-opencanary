@@ -1,10 +1,41 @@
 ---
 - include_tasks: variables.yml
 - include_tasks: "setup-{{ ansible_os_family }}.yml"
-- include_tasks: setup.yml
-- include_tasks: configure.yml
 
-# finalize
+- name: Install python dependencies
+  pip:
+    name: "{{ item.key }}"
+    version: "~={{ item.value }}"
+  with_dict: "{{ opencanary_python_packages }}"
+
+- name: Setup paths
+  file:
+    path: "{{ item }}"
+    state: directory
+    mode: 0755
+  loop:
+    - /etc/opencanaryd
+    - /var/log/opencanary
+
+- name: Configure opencanary
+  copy:
+    content: "{{ __opencanary_config }}"
+    dest: "/etc/opencanaryd/opencanary.conf"
+    mode: 0644
+  notify: restart opencanary
+
+- name: Configure opencanary log rotation
+  template:
+    src: logrotate.conf.j2
+    dest: "{{ opencanary_logrotate_path }}/opencanary"
+    mode: 0644
+
+- name: Configure systemd
+  template:
+    src: opencanary.service.j2
+    dest: "{{ opencanary_systemd_path }}/opencanary.service"
+    mode: 0644
+
 - name: Mark opencanary enabled on boot, and state if set
   systemd:
     name: opencanary
